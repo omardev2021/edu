@@ -12,12 +12,18 @@
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Lemonada&display=swap" rel="stylesheet"></link>
 
+
+        <style>
+            * {
+                direction: rtl;
+            }
+        </style>
         <!-- Scripts -->
         @routes
-        @vite(['resources/js/app.js', "resources/css/app.css"])
+        @vite(['resources/js/app.js', 'resources/css/app.css'])
         @inertiaHead
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased" dir="rtl">
         @inertia
     </body>
 </html>

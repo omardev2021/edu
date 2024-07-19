@@ -92,14 +92,14 @@ export default {
 
         const showSuccessToast = () => {
             toast.success('تم الإرسال بنجاح', {
-                position: 'top-right',
+                position: 'top-left',
                 duration: 5000,
             });
         };
 
         const showErrorToast = (message) => {
             toast.error(message, {
-                position: 'top-right',
+                position: 'top-left',
                 duration: 3000,
             });
         };

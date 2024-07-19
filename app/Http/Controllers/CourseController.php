@@ -120,11 +120,20 @@ class CourseController extends Controller
                 });
 
 
+        // Fetch the next course in the same path
+        $nextCourse = Course::where('path_id', $course->path_id)
+            ->where('id', '>', $course->id)
+            ->orderBy('id', 'asc')
+            ->first();
 
+        if ($nextCourse) {
+            $nextCourse->is_accessible = $user && $user->can('view', $nextCourse);
+        }
 
         return Inertia::render('Courses/CoursePage', [
             'course' => $course,
-            'relatedCourses' => $relatedCourses
+            'relatedCourses' => $relatedCourses,
+            'nextCourse' => $nextCourse
         ]);
     }
 

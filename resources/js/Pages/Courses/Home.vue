@@ -18,7 +18,7 @@
                                     </div>
                                     <div>
                                         <h1 class="text-2xl font-bold text-yellow-500">دبولمة ادارة المخزون</h1>
-                                        <p class="text-gray-500">{{paths.length + 1}} مسارات •  تم اكمال 0%</p>
+                                        <p class="text-gray-500">{{paths.length + 1}} مسارات •  تم اكمال {{ progressPercentage.toFixed(0) }}%</p>
                                     </div>
 
                                 </div>
@@ -41,10 +41,9 @@
                                         </div>
 
 
-                                        <div class="text-sm font-bold text-grayDark">{{ progressPercentage.toFixed(0) }}%</div>
+                                        <div class="text-sm font-bold text-grayDark">{{ progressPercentageForActivePath.toFixed(0) }}%</div>
                                     </div>
-                                    <img src="../../assets/road.png" class="w-[55px]  mx-auto ">
-
+                                    <img :src="activePath.completed ? '/images/road-y.png' : '/images/road.png'" class="w-[55px]  mx-auto ">
 
                                     <div class="mt-2  py-4 px-8 text-veryDarkBlue">{{activePath.title}}</div>
                                 </div>
@@ -72,7 +71,7 @@
                         <div class="flex justify-between items-center p-4">
                             <div>
                                 <h3 class="text-xl font-bold text-gray-600">{{ activePath.title }}</h3>
-                                <p class="text-sm">{{ totalCourses }} كورسات • تم اكمال {{ progressPercentage.toFixed(0) }}%</p>
+                                <p class="text-sm">{{ totalCourses }} كورسات • تم اكمال {{ progressPercentageForActivePath.toFixed(0) }}%</p>
                             </div>
                             <button @click="toggleParts" class="bg-white font-semibold shadow-lg px-4 py-2 rounded-full flex items-center justify-center gap-2 border border-gray-200">
                                 منهج الدورة
@@ -277,6 +276,7 @@ const props = defineProps({
     activePath: Object,
     totalCourses: Number,
     progressPercentage: Number,
+    progressPercentageForActivePath: Number,
     bookmarks: Array,
     completedCourses: Array,
 

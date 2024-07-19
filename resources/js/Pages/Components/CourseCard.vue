@@ -29,8 +29,8 @@
             </div>
             <div :class="{
                 'flex justify-between items-center mt-4 font-secondary': true,
-                'bg-purpleCustom text-white': course.is_accessible && course.completed_lessons === course.total_lessons,
-                'bg-softBlue text-white': course.is_accessible && course.completed_lessons > 0 && course.completed_lessons !== course.total_lessons,
+                'bg-softBlue text-white': course.is_accessible && course.completed_lessons === course.total_lessons,
+                'bg-purpleCustom text-white': course.is_accessible && course.completed_lessons > 0 && course.completed_lessons !== course.total_lessons,
                 'bg-softRed text-white': course.is_accessible && course.completed_lessons === 0,
                 'bg-grayDark text-white': !course.is_accessible
             }">
@@ -57,17 +57,27 @@
 import { ref } from 'vue';
 import { Link } from '@inertiajs/vue3';
 import axios from 'axios';
+import { useToast } from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-sugar.css';
 
 // Define props
 const props = defineProps({
     course: Object,
 });
-
+const toast = useToast();
 // Destructure course from props
 const { course } = props;
 
 // Define bookmarked state
 const bookmarked = ref(course.bookmarked);
+
+
+const showSuccessToast = (message) => {
+    toast.success(message, {
+        position: 'top-left',
+        duration: 5000,
+    });
+};
 
 // Function to toggle bookmark status
 const toggleBookmark = async (event) => {
@@ -78,9 +88,11 @@ const toggleBookmark = async (event) => {
         if (bookmarked.value) {
             await axios.delete(route('bookmark.destroy'), { data: { course_id: course.id } });
             bookmarked.value = false;
+            showSuccessToast('تمت إزالة الكورس بنجاح');
         } else {
             await axios.post(route('bookmark.store'), { course_id: course.id });
             bookmarked.value = true;
+            showSuccessToast('تمت اضافة الكورس بنجاح');
         }
     } catch (error) {
         console.error(error);

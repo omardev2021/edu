@@ -7,14 +7,12 @@
                 </div>
                 <div class="flex items-center">
                     <div class="flex items-center mr-4 circles">
-                        <span
+
+                        <LessonHexagon
                             v-for="lesson in chapter.lessons"
                             :key="lesson.id"
-                            :class="[
-                                'w-4 h-4 rounded-full mr-1',
-                                lesson.completed ? 'bg-white' : 'border border-white'
-                            ]"
-                        ></span>
+                            :completed="lesson.completed"
+                        />
                     </div>
                 </div>
             </div>
@@ -25,12 +23,12 @@
             <transition name="accordion" @enter="enter" @leave="leave">
                 <div v-if="isOpen" class="bg-white">
                     <div v-for="lesson in chapter.lessons" :key="lesson.id" class="border-b">
-                        <div class="flex justify-between">
+                        <div class="flex justify-between group">
                             <!-- Lesson Content -->
-                            <div class="w-3/4 p-3">
-                                <h3 class="font-bold text-sm">{{ lesson.lesson_number }}</h3>
-                                <h3 class="text-lg font-bold text-veryDarkBlue">{{ lesson.title }}</h3>
-                                <ul class="mt-4">
+                            <div class="w-3/4 p-3 ">
+                                <h3 class="font-bold text-darkBlue text-sm group-hover:text-softBlue">{{ lesson.lesson_number }}</h3>
+                                <h3 class="text-lg font-bold text-darkBlue group-hover:text-softBlue">{{ lesson.title }}</h3>
+                                <ul class="mt-2">
                                     <li v-for="objective in lesson.objectives" :key="objective.id" class="text-customGray">
                                     +    {{ objective.title }}
                                     </li>
@@ -40,9 +38,20 @@
                             <div class="bg-mainColor flex flex-col w-1/4">
                                 <div class="flex flex-col h-full justify-between">
                                     <div class="p-10 flex justify-center items-center">
-                                        <i :class="getLessonIcon(lesson)" class="text-3xl text-white"></i>
+
+
+                                        <img :src="getLessonIcon(lesson)" class="w-14 ">
+<!--                                        <i :class="getLessonIcon(lesson)" class="text-3xl text-white"></i>-->
                                     </div>
-                                    <div class="bg-softRed p-2 text-center text-white font-secondary w-full" @click="navigateToLesson(lesson)">
+                                    <div @click="navigateToLesson(lesson)"
+                                         :class="[
+                                            'p-2 text-center text-white font-secondary w-full',
+                                            {
+                                                'bg-softBlue text-white': lesson.completed_slides_count === lesson.total_slides_count,
+                                                'bg-purpleCustom text-white': lesson.completed_slides_count < lesson.total_slides_count,
+                                                'bg-softRed text-white': lesson.completed_slides_count === 0,
+                                            }
+                                         ]">
                                         {{ getLessonButtonText(lesson) }}
                                     </div>
                                 </div>
@@ -65,6 +74,8 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+import Hexagon from "@/Pages/Components/Hexagon.vue";
+import LessonHexagon from "@/Pages/Components/LessonHexagon.vue";
 
 const isOpen = ref(true)
 
@@ -119,11 +130,11 @@ const navigateToLesson = (lesson) => {
 
 const getLessonIcon = (lesson) => {
     if (lesson.completed_slides_count === 0) {
-        return 'fas fa-play';
+        return '/images/new.png';
     } else if (lesson.completed_slides_count < lesson.total_slides_count) {
-        return 'fas fa-play';
+        return '/images/prog.png';
     } else {
-        return 'fas fa-check-circle';
+        return '/images/com.png';
     }
 }
 

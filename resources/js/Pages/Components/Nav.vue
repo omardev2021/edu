@@ -6,9 +6,9 @@
                 <ul class="flex space-x-4">
                     <li>
                         <Link
-                            :href="route('path.show',1)"
+                            :href="route('path.index')"
                             class="nav-link text-lg ml-3"
-                            :class="{ 'bg-[rgba(256,255,255,0.2)] text-white font-bold': route().current('path.show'), 'hover:bg-[rgba(256,255,255,0.2)]': !route().current('home') }"
+                            :class="{ 'bg-[rgba(256,255,255,0.2)] text-white font-bold': route().current('path.show') || route().current('path.index'), 'hover:bg-[rgba(256,255,255,0.2)]': !route().current('home') }"
                         >الرئيسية</Link>
                     </li>
                     <li>
@@ -82,7 +82,7 @@
         <div class="container mx-auto px-4">
             <ul class="flex justify-around items-center py-2 ">
                 <li>
-                    <Link :href="route('path.show',1)" class="mobile-nav-link" :class="{ active: route().current('path.show') }">
+                    <Link :href="route('path.index')" class="mobile-nav-link" :class="{ active: route().current('path.show') || route().current('path.index') }">
                         <i class="fas fa-home text-xl "></i>
                         <span class="text-sm ">الرئيسية</span>
                     </Link>

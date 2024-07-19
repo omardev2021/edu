@@ -20,12 +20,31 @@
                         </p>
                     </div>
                     <!--                    second part-->
-                    <div class="bg-white p-4 rounded-md mb-6 flex justify-between items-center">
+                    <div class="bg-white p-4 rounded-md mb-6 flex justify-between items-center" v-if="nextCourse">
                         <div>
-                            <p class="text-sm">الجزء الاول | الدرس الاول</p>
-                            <h2 class="text-xl font-bold">ابدأ الان : ما هو تخطيط المخزون</h2>
+                            <p class="text-sm">الكورس التالي</p>
+                            <h2 class="text-xl font-bold">{{nextCourse.title}}</h2>
                         </div>
-                        <Link :href="route('lesson.show',1)" class="bg-softBlue text-white px-4 py-2 rounded-md">إبدا الدرس</Link>
+                        <Link :href="route('course.show',nextCourse.id)"
+                              :class="[
+            ' px-4 py-2 rounded-full',
+            {
+                'bg-softBlue text-white': nextCourse.is_accessible,
+                'bg-grayDark text-white': !nextCourse.is_accessible,
+
+            }
+        ]"
+                        >انتقل للكورس</Link>
+                    </div>
+
+
+                    <div class="mb-6 mt-20">
+                        <div class="divider-container">
+                            <div class="divider">
+                                <div class="diamond"></div>
+                            </div>
+                            <div class="divider-text ">الأجزاء</div>
+                        </div>
                     </div>
 
 
@@ -144,12 +163,20 @@ import Footer from "@/Pages/Components/Footer.vue";
 import { ref } from 'vue';
 import {Link} from '@inertiajs/vue3';
 import Feedback from "@/Pages/Components/Feedback.vue";
-
+import { useToast } from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-sugar.css';
 import Nav from "@/Pages/Components/Nav.vue";
 import axios from "axios";
+
+
+
+const toast = useToast();
+
+
 const props = defineProps({
     course: Object,
-    relatedCourses: Array
+    relatedCourses: Array,
+    nextCourse:Object
 });
 
 // Destructure course from props
@@ -157,6 +184,14 @@ const { course } = props;
 
 // Define bookmarked state
 const bookmarked = ref(course.bookmarked);
+
+
+const showSuccessToast = (message) => {
+    toast.success(message, {
+        position: 'top-left',
+        duration: 5000,
+    });
+};
 
 // Function to toggle bookmark status
 const toggleBookmark = async (event) => {
@@ -167,9 +202,13 @@ const toggleBookmark = async (event) => {
         if (bookmarked.value) {
             await axios.delete(route('bookmark.destroy'), { data: { course_id: course.id } });
             bookmarked.value = false;
+            showSuccessToast('تمت إزالة الكورس بنجاح');
+
         } else {
             await axios.post(route('bookmark.store'), { course_id: course.id });
             bookmarked.value = true;
+            showSuccessToast('تمت اضافة الكورس بنجاح');
+
         }
     } catch (error) {
         console.error(error);
@@ -211,6 +250,8 @@ const scrollToKeyTerms = () => {
         element.scrollIntoView({ behavior: 'smooth' });
     }
 }
+
+
 </script>
 
 <style>
