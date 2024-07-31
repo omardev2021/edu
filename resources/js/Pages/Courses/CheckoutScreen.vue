@@ -1,4 +1,5 @@
 <template>
+    <Head title="سجل الان" />
     <div class="bg-[#F3F4FF] font-primary" dir="rtl">
         <Nav />
         <div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg mt-8">
@@ -48,6 +49,7 @@ import { ref } from 'vue';
 import { useForm } from '@inertiajs/inertia-vue3';
 import Nav from "@/Pages/Components/Nav.vue";
 import Footer from "@/Pages/Components/Footer.vue";
+import { Head } from '@inertiajs/vue3'
 
 const form = useForm({
     name: '',

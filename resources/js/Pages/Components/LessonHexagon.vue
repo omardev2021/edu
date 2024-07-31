@@ -3,14 +3,16 @@
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 100 100"
         :class="[
-            'hexagon',
+            'circle',
             completed ? 'completed' : 'not-completed'
         ]"
         width="20"
         height="20"
     >
-        <polygon
-            points="50,1 98,25 98,75 50,99 2,75 2,25"
+        <circle
+            cx="50"
+            cy="50"
+            r="48"
             :fill="completed ? 'white' : 'transparent'"
             :stroke="completed ? 'none' : 'white'"
             stroke-width="7"
@@ -27,14 +29,14 @@ export default {
 </script>
 
 <style scoped>
-.hexagon {
+.circle {
     margin: 0 1.5px;
 }
-.hexagon.not-completed polygon {
+.circle.not-completed circle {
     fill: transparent;
     stroke: white;
 }
-.hexagon.completed polygon {
+.circle.completed circle {
     fill: white;
     stroke: none;
 }

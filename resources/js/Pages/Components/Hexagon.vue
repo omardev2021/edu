@@ -3,15 +3,17 @@
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 100 100"
         :class="[
-      'hexagon',
-      completed ? 'completed' : 'not-completed',
-      isCurrent ? 'current' : ''
-    ]"
+            'circle',
+            completed ? 'completed' : 'not-completed',
+            isCurrent ? 'current' : ''
+        ]"
         @click="handleClick"
         width="20" height="20"
     >
-        <polygon
-            points="50,1 98,25 98,75 50,99 2,75 2,25"
+        <circle
+            cx="50"
+            cy="50"
+            r="48"
             :fill="completed ? (isCurrent ? 'transparent' : 'white') : '#a8a8a8'"
             :stroke="isCurrent ? 'white' : (completed ? 'white' : 'none')"
             stroke-width="7"
@@ -38,15 +40,15 @@ export default {
 </script>
 
 <style scoped>
-.hexagon {
+.circle {
     cursor: pointer;
     margin: 0 1.5px;
 }
-.hexagon.not-completed polygon {
+.circle.not-completed circle {
     fill: rgba(0, 0, 0, 0.4);
     stroke: none;
 }
-.hexagon.current polygon {
+.circle.current circle {
     fill: transparent !important;
     stroke: white !important;
 }

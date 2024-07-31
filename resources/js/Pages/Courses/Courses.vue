@@ -1,4 +1,5 @@
 <template>
+    <Head title="المواضيع" />
     <Nav />
     <Feedback />
     <div class="bg-[#F3F4FF]">
@@ -101,6 +102,8 @@ import CourseCard from "@/Pages/Components/CourseCard.vue";
 import Nav from "@/Pages/Components/Nav.vue";
 import Feedback from "@/Pages/Components/Feedback.vue";
 import Footer from "@/Pages/Components/Footer.vue";
+import { Head } from '@inertiajs/vue3'
+
 
 const props = defineProps({
     topics: Array,

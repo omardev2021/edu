@@ -24,14 +24,10 @@ use Inertia\Inertia;
 |
 */
 
-//Route::get('/', function () {
-//    return Inertia::render('Welcome', [
-//        'canLogin' => Route::has('login'),
-//        'canRegister' => Route::has('register'),
-//        'laravelVersion' => Application::VERSION,
-//        'phpVersion' => PHP_VERSION,
-//    ]);
-//});
+Route::get('/', function () {
+
+    return Inertia::render('Home');
+})->name('home');
 
 
 
@@ -46,7 +42,7 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/paths/{id}',[PathController::class,'show'])->name('path.show');
-    Route::get('/',[PathController::class,'index'])->name('path.index');
+    Route::get('/course',[PathController::class,'index'])->name('path.index');
 
     Route::get('/courses/{id}',[CourseController::class,'show'])->name('course.show');
 

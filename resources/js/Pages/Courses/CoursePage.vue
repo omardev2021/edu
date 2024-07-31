@@ -1,5 +1,5 @@
 <template>
-
+    <Head :title="course.title" />
     <Nav />
     <Feedback />
     <div class="bg-[#F3F4FF] text-gray-800">
@@ -167,6 +167,7 @@ import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import Nav from "@/Pages/Components/Nav.vue";
 import axios from "axios";
+import {Head} from '@inertiajs/vue3';
 
 
 

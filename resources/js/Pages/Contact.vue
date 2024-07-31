@@ -1,5 +1,7 @@
 <template>
+    <Head title="تواصل معنا"/>
     <Nav />
+
     <Feedback />
 
     <div class="flex flex-col bg-mainColor p-4 md:p-20 font-primary mx-auto font-primary">
@@ -62,14 +64,17 @@
 
 <script>
 import { Inertia } from '@inertiajs/inertia';
+import { Head } from '@inertiajs/vue3'
 import { ref } from 'vue';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import Nav from "@/Pages/Components/Nav.vue";
 import Footer from "@/Pages/Components/Footer.vue";
 import Feedback from "@/Pages/Components/Feedback.vue";
+
+
 export default {
-    components: {Footer, Nav,Feedback},
+    components: {Footer, Nav,Feedback,Head},
     setup() {
         const toast = useToast();
 

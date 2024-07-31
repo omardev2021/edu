@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\Lesson;
 use App\Models\Path;
 use Illuminate\Foundation\Application;
@@ -15,6 +16,7 @@ class PathController extends Controller
     {
         $id = 1;
         $user = auth()->user();
+
 
         $active_path = Path::with(['courses.chapters.lessons'])->findOrFail($id);
         $active_path->courses->each(function ($course) use ($user) {
@@ -135,6 +137,10 @@ class PathController extends Controller
             return $course;
         });
 
+        $coursesNo = Course::all()->count();
+
+
+
         return Inertia::render('Courses/Home', [
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
@@ -146,7 +152,8 @@ class PathController extends Controller
             'progressPercentage' => $progressPercentage,
             'progressPercentageForActivePath' => $progressPercentageForActivePath,
             'bookmarks' => $bookmarks,
-            'completedCourses' => $completedCourses
+            'completedCourses' => $completedCourses,
+            'coursesNo'=>$coursesNo
         ]);
     }
 

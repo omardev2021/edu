@@ -1,4 +1,5 @@
 <template>
+    <Head title="كورس ادارة المخزون" />
     <Feedback />
    <Nav />
     <div class="bg-[#F3F4FF] text-gray-800">
@@ -8,82 +9,33 @@
             <div class="lg:col-span-2 ">
                 <section class="mb-6">
 
-                    <!-- all paths -->
-                    <Transition name="fade">
-                        <div v-if="!showCourseDataPart" class="p-6 bg-white shadow-md rounded-sm text-gray-600">
-                            <div class="flex justify-between mb-4 items-center">
-                                <div class="flex gap-3 items-center">
-                                    <div>
-                                        <img src="../../assets/cer-icon.png" class="w-[55px]">
-                                    </div>
-                                    <div>
-                                        <h1 class="text-2xl font-bold text-yellow-500">دبولمة ادارة المخزون</h1>
-                                        <p class="text-gray-500">{{paths.length + 1}} مسارات •  تم اكمال {{ progressPercentage.toFixed(0) }}%</p>
-                                    </div>
 
-                                </div>
-                                <div>
-                                    <button @click="toggleParts" class="bg-white text-md font-semibold shadow-lg px-5 py-1 rounded-full border border-gray-200">إغلاق</button>
-
-                                </div>
-                            </div>
-                            <p class="mt-2">يقدم ماجستير إدارة الأعمال لدينا المعرفة والمهارات التي تحتاجها للنجاح في بيئة الأعمال اليوم. اضغط على أي تركيز لتنشيطه وبدء التعلم.</p>
-
-                            <div class="flex flex-col items-center mb-4">
-
-<!--                                active path-->
-                                <Link :href="route('path.show',activePath.id)">
-                                <div class="  rounded-md text-center my-4 border border-gray-200 cursor-pointer hover:bg-gray-100 ">
-                                    <div class="flex justify-between items-center p-1 ">
-                                        <div>
-                                            <p class="text-grayDark font-semibold text-sm">فعال</p>
-
-                                        </div>
-
-
-                                        <div class="text-sm font-bold text-grayDark">{{ progressPercentageForActivePath.toFixed(0) }}%</div>
-                                    </div>
-                                    <img :src="activePath.completed ? '/images/road-y.png' : '/images/road.png'" class="w-[55px]  mx-auto ">
-
-                                    <div class="mt-2  py-4 px-8 text-veryDarkBlue">{{activePath.title}}</div>
-                                </div>
-                            </Link>
-
-                                <div class="flex items-center w-full my-4">
-                                    <hr class="flex-grow border-gray-300">
-                                    <p class="mx-4 text-gray-500 whitespace-nowrap">يتم فتح المنهج بالكامل بعد <br> اكمال بياناتك والاشتراك</p>
-                                    <hr class="flex-grow border-gray-300">
-                                </div>                            </div>
-                            <div class="flex flex-wrap justify-center gap-4 text-center">
-<!--                                all paths-->
-
-                                <PathItem v-for="path in paths" :key="path.id" :path="path" />
-
-                            </div>
-
-                        </div>
-                    </Transition>
 
                     <!-- Course Data Part -->
                     <Transition name="fade">
                 <div>
-                    <div v-if="showCourseDataPart" class="bg-white shadow-md rounded-sm text-gray-600">
-                        <div class="flex justify-between items-center p-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-gray-600">{{ activePath.title }}</h3>
-                                <p class="text-sm">{{ totalCourses }} كورسات • تم اكمال {{ progressPercentageForActivePath.toFixed(0) }}%</p>
+                    <div  class="bg-white shadow-md rounded-sm text-gray-600">
+
+
+                        <div class="flex justify-between mb-4 items-center pt-4 px-4">
+                            <div class="flex gap-3 items-center">
+                                <div>
+                                    <img src="../../assets/cer-icon.png" class="w-[55px]">
+                                </div>
+                                <div>
+                                    <h1 class="text-2xl font-bold text-yellow-500">دبولمة ادارة المخزون</h1>
+                                    <p class="text-gray-500">{{coursesNo}} كورسات •  تم اكمال {{ progressPercentage.toFixed(0) }}%</p>
+                                </div>
+
                             </div>
-                            <button @click="toggleParts" class="bg-white font-semibold shadow-lg px-4 py-2 rounded-full flex items-center justify-center gap-2 border border-gray-200">
-                                منهج الدورة
-                                <img src="../../assets/cer-icon.png" class="w-5">
-                            </button>
+
                         </div>
                         <p class="mt-4 p-4">{{ activePath.description }}</p>
                         <hr>
                         <div class="flex justify-between items-center p-4">
                             <div>
                                 <h3 class="text-xl font-bold text-gray-600">كورس ادارة المخزون</h3>
-                                <p class="text-sm">{{ activePath.courses.length }} كورسات . تم اكمال {{ progressPercentage.toFixed() }}%</p>
+                                <p class="text-sm">{{ coursesNo }} كورسات . تم اكمال {{ progressPercentage.toFixed() }}%</p>
                             </div>
                             <Link :href="route('course.index')" class="bg-[#4215ba] text-white shadow-lg px-4 py-2 rounded-full">انتقل للدورات</Link>
                         </div>
@@ -279,6 +231,7 @@ const props = defineProps({
     progressPercentageForActivePath: Number,
     bookmarks: Array,
     completedCourses: Array,
+    coursesNo:Number
 
 });
 
@@ -292,6 +245,7 @@ const toggleParts = () => {
 </script>
 
 <style scoped>
+
 *{
     direction: rtl;
 }

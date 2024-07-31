@@ -43,10 +43,10 @@
                         إبدأ الدرس
                     </button>
                 </div>
-                <div v-else-if="currentSlideIndex <= slides.length" class="flex flex-col items-center">
+                <div v-else-if="currentSlideIndex <= slides.length" class="flex flex-col ">
                     <img v-if="currentSlide.image_path" :src="getImagePath(currentSlide.image_path)" alt="Slide Image" class="w-full md:w-3/4 h-auto md:h-[300px] mt-20" />
                     <div v-for="content in currentSlide.contents" :key="content.id" class="mt-4 mb-2 text-start">
-                        <p class="max-w-3xl">{{ content.content }}</p>
+                        <p class="max-w-4xl text-xl">{{ content.content }}</p>
                     </div>
                 </div>
                 <!-- Final Slide -->

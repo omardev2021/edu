@@ -1,4 +1,5 @@
 <template>
+
     <header class="bg-[#4215ba] text-white py-4 font-primary" dir="rtl">
         <div class="container mx-auto px-4 flex justify-between items-center">
             <img src="../../assets/lowkalo-ww.png" class="justify-center" width="130">
@@ -6,17 +7,24 @@
                 <ul class="flex space-x-4">
                     <li>
                         <Link
-                            :href="route('path.index')"
+                            :href="route('home')"
                             class="nav-link text-lg ml-3"
-                            :class="{ 'bg-[rgba(256,255,255,0.2)] text-white font-bold': route().current('path.show') || route().current('path.index'), 'hover:bg-[rgba(256,255,255,0.2)]': !route().current('home') }"
+                            :class="{ 'bg-[rgba(256,255,255,0.2)] text-white font-bold': $page.url === '/about', 'hover:bg-[rgba(256,255,255,0.2)]': $page.url !== '/about' }"
                         >الرئيسية</Link>
+                    </li>
+                    <li>
+                        <Link
+                            :href="route('path.index')"
+                            class="nav-link text-lg "
+                            :class="{ 'bg-[rgba(256,255,255,0.2)] text-white font-bold': route().current('path.show') || route().current('path.index'), 'hover:bg-[rgba(256,255,255,0.2)]': !route().current('home') }"
+                        >الكورس</Link>
                     </li>
                     <li>
                         <Link
                             href="/courses"
                             class="nav-link text-lg"
                             :class="{ 'bg-[rgba(256,255,255,0.2)] text-white font-bold': route().current('course.index'), 'hover:bg-[rgba(256,255,255,0.2)]': !route().current('home') }"
-                        >الكورسات</Link>
+                        >المواضيع</Link>
                     </li>
                     <li>
                         <Link
@@ -25,13 +33,7 @@
                             :class="{ 'bg-[rgba(256,255,255,0.2)] text-white font-bold': $page.url === '/contact-us', 'hover:bg-[rgba(256,255,255,0.2)]': $page.url !== '/contact-us' }"
                         >تواصل معنا</Link>
                     </li>
-                    <li>
-                        <Link
-                            href="#"
-                            class="nav-link text-lg"
-                            :class="{ 'bg-[rgba(256,255,255,0.2)] text-white font-bold': $page.url === '/about', 'hover:bg-[rgba(256,255,255,0.2)]': $page.url !== '/about' }"
-                        >الخدمات</Link>
-                    </li>
+
                     <li>
                         <Link
                             :href="route('checkout')"
@@ -82,15 +84,21 @@
         <div class="container mx-auto px-4">
             <ul class="flex justify-around items-center py-2 ">
                 <li>
-                    <Link :href="route('path.index')" class="mobile-nav-link" :class="{ active: route().current('path.show') || route().current('path.index') }">
+                    <Link :href="route('home')" class="mobile-nav-link" :class="{ active: $page.url === '/resources' }">
                         <i class="fas fa-home text-xl "></i>
                         <span class="text-sm ">الرئيسية</span>
                     </Link>
                 </li>
                 <li>
+                    <Link :href="route('path.index')" class="mobile-nav-link" :class="{ active: route().current('path.show') || route().current('path.index') }">
+                        <i class="fas fa-pen text-xl "></i>
+                        <span class="text-sm ">الكورس</span>
+                    </Link>
+                </li>
+                <li>
                     <Link href="/courses" class="mobile-nav-link" :class="{ active: $page.url === '/courses' }">
                         <i class="fas fa-book text-xl "></i>
-                        <span class="text-sm ">الكورسات</span>
+                        <span class="text-sm ">المواضيع</span>
                     </Link>
                 </li>
                 <li>
@@ -99,12 +107,7 @@
                         <span class="text-sm ">تواصل معنا</span>
                     </Link>
                 </li>
-                <li>
-                    <Link href="#" class="mobile-nav-link" :class="{ active: $page.url === '/resources' }">
-                        <i class="fas fa-folder-open text-xl "></i>
-                        <span class="text-sm ">الخدمات</span>
-                    </Link>
-                </li>
+
                 <li>
                     <Link href="/apply" class="mobile-nav-link" :class="{ active: $page.url === '/apply' }">
                         <i class="fas fa-file-alt text-xl "></i>
