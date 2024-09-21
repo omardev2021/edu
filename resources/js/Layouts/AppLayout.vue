@@ -41,14 +41,14 @@ const logout = () => {
                         <div class="flex">
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
-                                <Link :href="route('path.show',1)">
+                                <Link :href="route('path.index')">
                                     <ApplicationMark class="block h-9 w-auto" />
                                 </Link>
                             </div>
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex font-primary">
-                                <NavLink :href="route('path.show',1)" :active="route().current('dashboard')">
+                                <NavLink :href="route('path.index')" :active="route().current('dashboard')">
                                     الصفحة الرئيسية
                                 </NavLink>
                             </div>

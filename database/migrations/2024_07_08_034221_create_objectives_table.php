@@ -12,7 +12,7 @@ return new class extends Migration {
             $table->id();
             $table->timestamps();
             $table->longText('title');
-            $table->foreignIdFor(Lesson::class)->constrained()->restrictOnDelete();
+            $table->foreignIdFor(Lesson::class)->constrained()->cascadeOnDelete();
         });
     }
 

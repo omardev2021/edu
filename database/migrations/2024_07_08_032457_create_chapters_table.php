@@ -13,7 +13,7 @@ return new class extends Migration {
             $table->timestamps();
             $table->string('title');
             $table->string('chapter_number');
-            $table->foreignIdFor(Course::class)->constrained()->restrictOnDelete();
+            $table->foreignIdFor(Course::class)->constrained()->cascadeOnDelete();
         });
     }
 

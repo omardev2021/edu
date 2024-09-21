@@ -11,7 +11,7 @@
 
                     <div class=" mb-6">
                         <div class="flex gap-3 items-center mb-2">
-                            <img :src="getImagePath(course.image_path)" class=" w-20 justify-center" >
+                            <img :src="'/storage/' + course.image_path" class=" w-20 justify-center" >
                             <h1 class="text-4xl font-bold text-softBlue max-w-lg leading-snug	">{{ course.title }}</h1>
 
                         </div>

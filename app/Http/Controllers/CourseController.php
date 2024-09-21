@@ -110,8 +110,7 @@ class CourseController extends Controller
         $course->bookmarked = $user && $course->isBookmarkedBy($user);
 
         // Fetch related courses in the same path
-        $relatedCourses = Course::where('path_id', $course->path_id)
-            ->where('id', '!=', $course->id)
+        $relatedCourses = Course::where('id', '!=', $course->id)
             ->take(3)
             ->get()
             ->map(function ($course) use ($user) {
@@ -121,8 +120,7 @@ class CourseController extends Controller
 
 
         // Fetch the next course in the same path
-        $nextCourse = Course::where('path_id', $course->path_id)
-            ->where('id', '>', $course->id)
+        $nextCourse = Course::where('id', '>', $course->id)
             ->orderBy('id', 'asc')
             ->first();
 

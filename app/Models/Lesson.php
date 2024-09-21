@@ -9,7 +9,7 @@ use SlideCompletion;
 
 class Lesson extends Model
 {
-
+    protected $guarded = [];
     public function chapter(): BelongsTo
     {
         return $this->belongsTo(Chapter::class);

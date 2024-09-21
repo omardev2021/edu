@@ -17,9 +17,11 @@
                 </div>
             </div>
             <div class="flex gap-2 p-4 items-center">
-                <img :src="course.is_accessible ? getImagePath(course.image_path) : '/images/locked.png'" class="w-10 justify-center">
+                <img :src="course.is_accessible ? '/storage/' + course.image_path : '/images/locked.png'" class="w-10 justify-center">
                 <h3 class="font-bold text-gray-600 text-lg">{{ course.title }}</h3>
             </div>
+
+
             <hr>
             <p class="text-gray-600 p-4 text-sm">{{ course.description }}</p>
             <div class="flex flex-row items-center gap-1 mr-4">

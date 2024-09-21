@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Chapter extends Model
 {
+    protected $guarded = [];
 
     public function course(): BelongsTo
     {

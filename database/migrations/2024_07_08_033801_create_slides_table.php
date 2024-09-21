@@ -12,7 +12,10 @@ return new class extends Migration {
             $table->id();
             $table->timestamps();
             $table->string('image_path')->nullable();
-            $table->foreignIdFor(Lesson::class)->constrained()->restrictOnDelete();
+            $table->longText('content');
+            $table->longText('html');
+
+            $table->foreignIdFor(Lesson::class)->constrained()->cascadeOnDelete();
         });
     }
 

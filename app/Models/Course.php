@@ -9,6 +9,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Course extends Model
 {
 
+    protected $fillable = [
+        'title',
+        'description',
+        'image_path',
+        'type',
+        'is_featured',
+    ];
+
 
     public function path() {
         return $this->belongsTo(Path::class);

@@ -23,19 +23,19 @@
                                     <img src="../../assets/cer-icon.png" class="w-[55px]">
                                 </div>
                                 <div>
-                                    <h1 class="text-2xl font-bold text-yellow-500">دبولمة ادارة المخزون</h1>
-                                    <p class="text-gray-500">{{coursesNo}} كورسات •  تم اكمال {{ progressPercentage.toFixed(0) }}%</p>
+                                    <h1 class="text-2xl font-bold text-yellow-500">{{ settings.program_name }}</h1>
+                                    <p class="text-gray-500">{{totalCourses}} كورسات •  تم اكمال {{ progressPercentage.toFixed(0) }}%</p>
                                 </div>
 
                             </div>
 
                         </div>
-                        <p class="mt-4 p-4">{{ activePath.description }}</p>
+                        <p class="mt-4 p-4">{{ settings.program_description }}</p>
                         <hr>
                         <div class="flex justify-between items-center p-4">
                             <div>
-                                <h3 class="text-xl font-bold text-gray-600">كورس ادارة المخزون</h3>
-                                <p class="text-sm">{{ coursesNo }} كورسات . تم اكمال {{ progressPercentage.toFixed() }}%</p>
+                                <h3 class="text-xl font-bold text-gray-600">{{ settings.program_name }}</h3>
+                                <p class="text-sm">{{ totalCourses }} كورسات . تم اكمال {{ progressPercentage.toFixed() }}%</p>
                             </div>
                             <Link :href="route('course.index')" class="bg-[#4215ba] text-white shadow-lg px-4 py-2 rounded-full">انتقل للدورات</Link>
                         </div>
@@ -43,7 +43,7 @@
                     <!-- path's courser -->
                     <div v-if="showCourseDataPart" class="low-opacity shadow-md rounded-sm text-gray-600 px-4">
                         <!-- Item -->
-                        <CourseLine v-for="course in activePath.courses" :key="course.id" :course="course" />
+                        <CourseLine v-for="course in courses" :key="course.id" :course="course" />
 
 
 
@@ -59,33 +59,13 @@
                     <div class="bg-white shadow-md rounded-sm text-gray-600 p-6 lg:max-w-sm mt-5">
                         <div class="space-y-4">
                             <div class="flex items-center gap-4">
-                                <img src="../../assets/student.avif" alt="Student 1" class="w-16 h-16 rounded-full">
+                                <img src="/images/m-profile.jpg" alt="Student 1" class="w-16 h-16 rounded-full">
                                 <div>
-                                    <h3 class="font-bold">عمر اسامة</h3>
-                                    <p class="text-sm">مهندس برمجيات<br>السودان جامعة المستقبل</p>
+                                    <h3 class="font-bold">محمد الشريف</h3>
+                                    <p class="text-sm">المدير التنفيذي لسلسلة مطاعم</p>
                                 </div>
                             </div>
-                            <div class="flex items-center gap-4">
-                                <img src="../../assets/student.avif" alt="Student 1" class="w-16 h-16 rounded-full">
-                                <div>
-                                    <h3 class="font-bold">عمر اسامة</h3>
-                                    <p class="text-sm">مهندس برمجيات<br>السودان جامعة المستقبل</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-4">
-                                <img src="../../assets/student.avif" alt="Student 1" class="w-16 h-16 rounded-full">
-                                <div>
-                                    <h3 class="font-bold">عمر اسامة</h3>
-                                    <p class="text-sm">مهندس برمجيات<br>السودان جامعة المستقبل</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-4">
-                                <img src="../../assets/student.avif" alt="Student 1" class="w-16 h-16 rounded-full">
-                                <div>
-                                    <h3 class="font-bold">عمر اسامة</h3>
-                                    <p class="text-sm">مهندس برمجيات<br>السودان جامعة المستقبل</p>
-                                </div>
-                            </div>
+
                             <div class="text-center">
                                 <button class="bg-white text-sm font-semibold shadow-lg px-4 py-1 rounded-full  border border-gray-200">
                                     انضم الينا الان
@@ -118,12 +98,12 @@
                     </div>
                     <h3 class="font-bold text-grayDark text-center pb-2">للاجوبة السريعة</h3>
                     <ul class="list-disc list-inside text-grayDark">
-                        <li>تواصل معنا عبر البريد البريد الالكتروني <span class="underline text-blue-500">info@lowkalo.com</span></li>
-                        <li>اتصال او واتس اب <span class="underline text-blue-500">055555555</span></li>
+                        <li>تواصل معنا عبر البريد البريد الالكتروني <span class="underline text-blue-500">{{ settings.email }}</span></li>
+                        <li>اتصال او واتس اب <span class="underline text-blue-500">{{ settings.phone }}</span></li>
                     </ul>
                     <h3 class="font-bold text-grayDark text-center pb-2 mt-4">لتفاصيل اكثر</h3>
                     <ul class="list-disc list-inside text-grayDark">
-                        <li>تواصل معنا <span class="underline text-blue-500">ارسل رسالة الان</span></li>
+                        <li>تواصل معنا <Link :href="route('contact.index')" class="underline text-blue-500">ارسل رسالة الان</Link></li>
                     </ul>
                 </div>
                 <!-- Repeated Sections -->
@@ -137,9 +117,10 @@
                     <p class=" text-grayDark pb-2">تعرف على المزيد حول برامج الشهادات المبتكرة التي تقدمها لوكالو والتي تعطل التعليم العالي التقليدي.</p>
 
                     <div class="text-center mt-3">
-                        <button class="bg-white text-xs font-semibold shadow-lg px-10 py-1 rounded-full  border border-gray-200 mb-2">برامج الادارة</button>
+                        <button class="bg-white text-xs font-semibold shadow-lg px-8 py-1 rounded-full  border border-gray-200 mb-2">برنامج ادارة المطاعم - قريبا
+                            </button>
                         <br>
-                        <button class="bg-white text-xs font-semibold shadow-lg px-8 py-1 rounded-full  border border-gray-200"> برامج المحاسبة</button>
+                        <button class="bg-white text-xs font-semibold shadow-lg px-8 py-1 rounded-full  border border-gray-200"> برنامج سلامة الغذاء - قريبا</button>
 
                     </div>
                 </div>
@@ -164,7 +145,7 @@
 
         </main>
 
-        <div class="mb-6 px-4 md:px-[135px] md:mx-6 mt-10">
+        <div class="mb-6 px-4 md:px-[135px] md:mx-6 mt-10" v-if="bookmarks.length > 0">
             <div class="divider-container">
                 <div class="divider">
                     <div class="diamond"></div>
@@ -182,7 +163,7 @@
                 />
             </div>
 
-        <div class="mb-6 px-4 md:px-[135px] md:mx-6 mt-20">
+        <div class="mb-6 px-4 md:px-[135px] md:mx-6 mt-20" v-if="completedCourses.length > 0">
             <div class="divider-container">
                 <div class="divider">
                     <div class="diamond"></div>
@@ -224,14 +205,13 @@ import Footer from "@/Pages/Components/Footer.vue";
 import CourseCard from "@/Pages/Components/CourseCard.vue";
 const props = defineProps({
 
-    paths: Array,
-    activePath: Object,
+    courses: Array,
     totalCourses: Number,
     progressPercentage: Number,
-    progressPercentageForActivePath: Number,
     bookmarks: Array,
     completedCourses: Array,
-    coursesNo:Number
+    settings:Array
+
 
 });
 

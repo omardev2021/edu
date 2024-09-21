@@ -67,6 +67,8 @@
                         <!-- Account Management -->
                         <div class="block px-4 py-2 text-xs text-gray-400">حساب المستخدم</div>
                         <DropdownLink :href="route('profile.show')">حسابي & الاعدادات</DropdownLink>
+                        <DropdownLink v-if="$page.props.auth.user.is_admin " :href="route('admin.index')">لوحة الإدارة</DropdownLink>
+
                         <DropdownLink v-if="$page.props.jetstream.hasApiFeatures" :href="route('api-tokens.index')">API Tokens</DropdownLink>
                         <div class="border-t border-gray-200" />
                         <!-- Authentication -->

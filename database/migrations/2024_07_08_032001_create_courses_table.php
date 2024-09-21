@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->longText('description');
             $table->string('image_path');
             $table->string('type');
-            $table->foreignIdFor(Path::class)->constrained()->restrictOnDelete();
+            $table->boolean('is_featured')->default(false);
             $table->timestamps();
         });
     }

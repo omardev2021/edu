@@ -27,7 +27,7 @@ class LessonController extends Controller
 
     public function show(Request $request, $id)
     {
-        $lesson = Lesson::with(['objectives', 'slides.contents','terms'])->findOrFail($id);
+        $lesson = Lesson::with(['objectives', 'slides','terms'])->findOrFail($id);
         $user = auth()->user();
 
         // Get completed slides for the user
